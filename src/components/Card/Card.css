@@ -1,0 +1,15 @@
+.card {
+  width: 290px;
+  box-shadow: 0px 3px 15px -5px #777777;
+  border-radius: 10px;
+}
+
+.cardTypes {
+  display: flex;
+  padding-left: 70px;
+}
+
+.cardData {
+  display: flex;
+  padding-left: 70px;
+}

@@ -46,7 +46,7 @@ function App() {
       ) : (
         <>
           {/* <h1>ポケモンデータを取得しました</h1> */}
-          <div className="grid-container">
+          <div className="pokemonCardContainer">
             {pokemonData.map((pokemon, i) => {
               return <Card key={i} pokemon={pokemon} />;
             })}

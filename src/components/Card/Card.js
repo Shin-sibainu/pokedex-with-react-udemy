@@ -1,28 +1,34 @@
 import React from "react";
+import "./Card.css";
 
 const Card = ({ pokemon }) => {
   return (
-    <div className="Card">
-      <div className="CardImg">
+    <div className="card">
+      <div className="cardImg">
         <img src={pokemon.sprites.front_default} alt="" />
       </div>
-      <div className="CardName">{pokemon.name}</div>
-      <div className="CardTypes">
+      <h3 className="cardName">{pokemon.name}</h3>
+      <div className="cardTypes">
+        <div className="typeName">タイプ：</div>
         {pokemon.types.map((type) => {
-          return <div className="CardType">{type.type.name}</div>;
+          return (
+            <>
+              <div className="cardType">{type.type.name}</div>
+            </>
+          );
         })}
       </div>
-      <div className="CardInfo">
-        <div className="CardData CardDataWeight">
-          <p className="title">重さ</p>
+      <div className="cardInfo">
+        <div className="cardData cardDataWeight">
+          <p className="title">重さ：</p>
           <p>{pokemon.weight}</p>
         </div>
-        <div className="CardData CardDataHeight">
-          <p className="title">高さ</p>
+        <div className="cardData cardDataHeight">
+          <p className="title">高さ：</p>
           <p>{pokemon.height}</p>
         </div>
-        <div className="CardData CardDataAbility">
-          <p className="title">アビリティ</p>
+        <div className="cardData cardDataAbility">
+          <p className="title">アビリティ：</p>
           <p>{pokemon.abilities[0].ability.name}</p>
         </div>
       </div>
