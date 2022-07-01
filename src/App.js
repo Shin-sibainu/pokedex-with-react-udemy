@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import "./App.css";
 import Card from "./components/Card/Card";
+import Navbar from "./components/Navbar/Navbar";
 import { getAllPokemon, getPokemon } from "./components/utils/pokemon";
 
 function App() {
@@ -14,8 +15,9 @@ function App() {
     const fetchData = async () => {
       //全てのポケモンデータを取得
       let res = await getAllPokemon(initialURL);
-      setNextURL(fetchData.next);
-      setPrevURL(fetchData.previaus);
+      console.log(res.next);
+      setNextURL(res.next);
+      setPrevURL(res.previous);
       //ポケモンデータの配列を利用して各ポケモンの詳細データをフェッチする．
       await loadPokemon(res.results);
       // console.log(res.results);
@@ -37,23 +39,49 @@ function App() {
     setPokemonData(_pokemonData);
   };
 
-  console.log(pokemonData);
+  // console.log(pokemonData);
+
+  const handleNextPage = async () => {
+    setLoading(true);
+    let data = await getAllPokemon(nextURL);
+    await loadPokemon(data.results);
+    setNextURL(data.next);
+    setPrevURL(data.previous);
+    setLoading(false);
+  };
+
+  const handlePrevPage = async () => {
+    if (!prevURL) return;
+    setLoading(true);
+    let data = await getAllPokemon(nextURL);
+    await loadPokemon(data.results);
+    setNextURL(data.next);
+    setPrevURL(data.previous);
+    setLoading(false);
+  };
 
   return (
-    <div className="App">
-      {loading ? (
-        <h1>ロード中・・・</h1>
-      ) : (
-        <>
-          {/* <h1>ポケモンデータを取得しました</h1> */}
-          <div className="pokemonCardContainer">
-            {pokemonData.map((pokemon, i) => {
-              return <Card key={i} pokemon={pokemon} />;
-            })}
-          </div>
-        </>
-      )}
-    </div>
+    <>
+      <Navbar />
+      <div className="App">
+        {loading ? (
+          <h1>ロード中・・・</h1>
+        ) : (
+          <>
+            {/* <h1>ポケモンデータを取得しました</h1> */}
+            <div className="pokemonCardContainer">
+              {pokemonData.map((pokemon, i) => {
+                return <Card key={i} pokemon={pokemon} />;
+              })}
+            </div>
+            <div className="btn">
+              <button onClick={handlePrevPage}>前へ</button>
+              <button onClick={handleNextPage}>次へ</button>
+            </div>
+          </>
+        )}
+      </div>
+    </>
   );
 }
 

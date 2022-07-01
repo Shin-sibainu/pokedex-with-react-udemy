@@ -2,14 +2,16 @@
   width: 290px;
   box-shadow: 0px 3px 15px -5px #777777;
   border-radius: 10px;
+  background-color: white;
 }
 
-.cardTypes {
-  display: flex;
-  padding-left: 70px;
+.cardName {
+  padding: 0;
+  font-size: 24px;
+  margin-bottom: 10px;
+  margin-top: 0;
 }
 
-.cardData {
-  display: flex;
-  padding-left: 70px;
+.cardInfo {
+  text-align: center;
 }
